@@ -1,0 +1,25 @@
+#middle{
+	margin:15px;
+}
+
+.inputs{
+	margin: 15px
+}
+
+.input_name {
+	width:200px;
+}
+
+.info{
+	width:12px;
+	height:12px;
+}
+
+.inputs input, .inputs textarea, .inputs select, .inputs a{
+	margin-left: 25px;
+	margin-bottom: 10px;
+}
+
+.bold{
+	font-weight: bold;
+}
