@@ -1,0 +1,167 @@
+html{
+
+}
+
+b{
+	font-weight: bold;
+}
+
+.info{
+	margin-left: 2px;
+	width:15px;
+	height: 15px;
+	position:relative;
+	top:2px;
+
+}
+#top, #bottom {
+	width:100%;
+	text-align: center;
+	overflow: hidden;
+}
+
+	#top img, #bottom img {
+		position: relative;
+		left:100%;
+		margin-left: -200%;
+	}
+
+#middle{
+	font-family: "Open Sans", "sans-serif";
+	font-style: normal;
+	font-weight: 300;
+	margin: 50px auto;
+	width: 1000px;
+}
+
+	#banner{
+		padding:10px;
+		font-size: 24px;
+		border-bottom: 1px solid rgb(70,70,70);
+	}
+
+	#message{
+		padding: 10px;
+		margin: 10px auto;
+		text-align: center;
+		background-color: rgb(200,200,200);
+
+	}
+
+	#left, #right {
+		display:inline-block;
+		height: 100%;
+	}
+
+	#left {
+		width:20%;
+		text-align: center;
+		padding-right: 10px;
+	}
+
+		#input_tools{
+			padding-bottom: 25px;
+		}
+			.list_item {
+				width:125px;
+			}
+
+			.list_name {
+				display: inline-block;
+				text-align: left;
+				width:125px;
+				font-size: 12px;
+			}
+
+			#list_input > div {
+				margin:10px;
+			}
+
+			#submit, #restart {
+				margin-top: 10px;
+				/*margin-left: 25%;*/
+			}
+
+		#output_tools{
+			border-top: 1px solid rgb(70,70,70);
+			padding-top: 25px;
+			font-size: 12px;
+		}
+
+			#user_email{
+				width:90%;
+			}
+
+
+	#right {
+		width:75%;
+		vertical-align: top;
+		text-align: center;
+	}
+		
+		#leaflet{
+			height:300px;
+			width: 750px;
+		}
+
+			iframe{
+				height:300px;
+				width: 750px;
+			}
+
+		#data{
+
+		}
+
+			#date_input {
+
+			}
+
+
+			#data_selection {
+
+				
+			}
+				#data_table {
+						width:100%;
+						font-size: 12px;
+					}
+
+					.c_sub, .row_header{
+						text-align: left;
+					}
+
+					.s_cb, .col_header {
+						text-align: center;
+					}
+
+					.s_cb {
+						background-color: rgb(138,163,185);
+					}
+
+					.s_fill {
+						background: repeating-linear-gradient(
+						  -45deg,
+						  rgb(88,108,128),
+						  rgb(88,108,128) 5px,
+						  rgb(138,163,185) 5px,
+						  rgb(138,163,185) 10px
+						);
+					}
+
+				td {
+				}
+
+				.row_header{
+					width:150px;
+				}
+		
+		#loading{
+			margin-top:150px;
+		}
+
+
+		#confirm_loading{
+			text-align: center;
+			margin: 100px;
+		}
