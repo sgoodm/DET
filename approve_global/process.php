@@ -84,8 +84,7 @@ switch ($_POST['type']) {
 		//crop global, update country_info.csv, add meta_info.json to country directories
 
 		//raster path
-		//$p_raster = "/AMU/globals/raw";
-		$p_raster = "/AMU/" . substr($newPath, 3);
+		$p_raster = "/".substr($newPath, 6);
 
 		//raster file
 		$f_raster = $file;
@@ -149,6 +148,7 @@ switch ($_POST['type']) {
 						
 						//create variable for R and run script
 						$r_vars = $p_raster ." ". $f_raster ." ". substr($p_shapefile,5) ." ". $f_shapefile ." ". substr($p_output,5) ." ". $f_output ." ". $COM_DIR;
+
 						if ($os == "lin"){
 							exec("/usr/bin/Rscript /var/www/html/aiddata/DET/AMU/approve_global/rasterCrop.R $r_vars");
 						} else if ($os == "win"){
