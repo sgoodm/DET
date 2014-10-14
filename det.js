@@ -62,10 +62,12 @@ $(document).ready(function(){
 		    "opacity": 0.85
 		}
 
-		var myLayer = L.geoJson(geojsonFeature,{style: myStyle}).addTo(map);
+		var myLayer = L.geoJson(geojsonFeature,{style: myStyle})//.addTo(map);
 		// myLayer.addData(geojsonFeature);
 
 		map.fitBounds( myLayer.getBounds() )
+
+		map.addLayer(myLayer)
 	}
 
 	//update the current path
@@ -303,8 +305,8 @@ $(document).ready(function(){
 		if (date_init == 1){
 			buildDateSelector("date_start", 1950, 2100)
 			buildDateSelector("date_end", 2100, 1950)
-			year_min = 1950
-			year_max = 2100
+			year_min = 2000
+			year_max = 2050
 		} else {
 			year_min = parseInt($("#date_start").val())
 			year_max = parseInt($("#date_end").val())

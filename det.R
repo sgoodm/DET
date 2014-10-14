@@ -1,3 +1,4 @@
+
 #load packages (manually preinstalled)
 library("raster")
 library("rgdal")
@@ -15,6 +16,9 @@ in_fRaster <- readIn[4]
 in_pCache <- readIn[5]
 in_fCache <- readIn[6]
 in_pBase <- readIn[7]
+in_extractType <- readIn[8]
+
+# write(in_extractType, "/var/www/html/aiddata/extractinfo.txt")
 
 #prepare paths
 #dir_base <- "G:/xampp/htdocs/gis/DET_03/resources/"
@@ -36,7 +40,11 @@ myRaster <- raster(in_fRaster, crs="+proj=longlat +datum=WGS84 +no_defs")
 myRaster[is.na(myRaster)] <- 0 
 
 #extract raster data
-myExtract <- extract(disaggregate(myRaster, fact=c(4,4)), myVector, fun=mean, sp=TRUE, weights=TRUE, small=TRUE)
+if (in_extractType == "sum"){
+	myExtract <- extract(myRaster, myVector, fun=sum, sp=TRUE, small=TRUE)
+} else {
+	myExtract <- extract(disaggregate(myRaster, fact=c(4,4)), myVector, fun=sum, sp=TRUE, weights=TRUE, small=TRUE)
+}
 myOutput <- myExtract@data
 
 #output to csv

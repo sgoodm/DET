@@ -88,7 +88,7 @@
                     <img src='img/meta_info.jpg' class='info' title="shapefile & rasters. Some raw data may not be available for distribution due to the data provider's terms of use. See the documentation provided with your request results for more details on the licenses associated with selected data">
                     <br>
                     <br>
-                    Email: <input type="text" id="user_email" value="aiddatatest@gmail.com">
+                    Email: <input type="text" id="user_email" value="">
                     <br>
                     <br>
                     <button id="request"  type="button" disabled="true">Submit Request</button> 

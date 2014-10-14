@@ -117,9 +117,13 @@ b{
 
 			}
 
+			#data_table{
+				/*width:99%;*/
+				/*overflow:scroll;*/
+			}
 
 			#data_selection {
-
+				overflow:auto;
 				
 			}
 				#data_table {

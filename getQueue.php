@@ -67,8 +67,14 @@ if (count($r_queue) > 0){
 		$path_cache = $q_data["continent"]."/".$q_data["country"]."/cache";
 		$file_cache = $q_data["continent"]."__".$q_data["country"]."__".$q_data["level"]."__".$q_data["year"]."__".$q_data["rtype"][$i]."__".$q_data["rsub"][$i]."__".$q_data["ryear"][$i].".csv";
 		$cacheList[] = $path_cache ."/". $file_cache;
+		$meta_grab = json_decode(file_get_contents($COM_DIR."/resources/".$path_raster."/meta_info.json"),true);
+		if ($meta_grab["meta_extract_type"]){
+			$extract_type = $meta_grab["meta_extract_type"];
+		} else {
+			$extract_type = "mean";
+		}
 		if ( $priority == 0 && !file_exists($COM_DIR ."/resources/". $path_cache ."/". $file_cache) ){
-			$r_vars = $path_shapefile ." ". $file_shapefile ." ".  $path_raster ." ".  $file_raster ." ". $path_cache . " " . $file_cache ." ". $COM_DIR;
+			$r_vars = $path_shapefile ." ". $file_shapefile ." ".  $path_raster ." ".  $file_raster ." ". $path_cache . " " . $file_cache ." ". $COM_DIR ." ". $extract_type;
 			$start_time = time();
 			if ($os == "win"){
 				exec($COM_DIR."\R\bin\Rscript ".$COM_DIR."\www\det.R $r_vars"); //*****DIRECTORY*****
