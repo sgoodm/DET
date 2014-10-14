@@ -68,38 +68,13 @@ switch ($_POST['type']) {
 		}
 
 
-
-
-		// //PUT INTO PROCESSED
-
-		// //create directory for new local
-		// if ( !is_dir($newPath) ){
-		// 	$old_mask = umask(0);
-		// 	mkdir($newPath, 0775, true);
-		// }
-
-		// //move local raster into processed directory
-		// rename($oldPath ."/". $file, $newPath ."/". $file);
-
-		// //create local meta_info.json
-		// file_put_contents($newPath . "/meta_info.json", json_encode($contents));
-
-
-		// //PUT INTO COUNTRY
-
-		// //add meta
-		// file_put_contents($_POST["path"] . "/meta_info.json", json_encode($contents));
-	
-
-
-
 		//add local to local_list.csv
 		$local_list = fopen("../../uploads/locals/local_list.csv", "a");
 		fputcsv($local_list, array($path[0], $path[1], $contents["raster_type"], $contents["raster_sub"], $contents["raster_year"]));
 		fclose($local_list);
 
 		//add meta for sub type if it does not already exist
-		$sub_meta = $dir_country . "/" . $country . "/data/rasters/" . $contents["raster_type"] ."/". $contents["raster_sub"] . "/meta_info.txt";
+		$sub_meta = $sub ."/meta_info.txt";
 		if (!file_exists($sub_meta)){
 			file_put_contents($sub_meta, $contents["meta_summary"]);
 		}

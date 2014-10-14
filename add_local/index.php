@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>AMU - Add Global</title> 
+    <title>AMU - Add Local</title> 
 
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 
@@ -99,6 +99,12 @@
 
                 <div class="input_name">Variable Interpretation</div> 
                 <textarea id="meta_variable_interpretation" name="meta_variable_interpretation" rows="3" cols="40" maxlength="10000"></textarea><br>
+
+                <div class="input_name">Extraction Type </div>
+                <select id="meta_extract_type" name="meta_extract_type">
+                    <option value="mean">Mean</option>
+                    <option value="sum">Sum</option>               
+                </select>
 
                 <div class="input_name">Warnings / Caveats / Licenses Details</div> 
                 <textarea id="meta_warnings" name="meta_warnings" rows="3" cols="40" maxlength="10000"></textarea><br>
