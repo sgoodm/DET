@@ -18,6 +18,16 @@ in_fCache <- readIn[6]
 in_pBase <- readIn[7]
 in_extractType <- readIn[8]
 
+bounds <- false
+if (readIn[9] != "" & readIn[10] != ""){
+	bounds <- true
+	in_lowerBound <- as.numeric(readIn[9])
+	in_upperBound <- as.numeric(readIn[10])
+}
+
+# write(paste(readIn[9], readIn[10], sep=" - "), "/var/www/html/aiddata/testBoundWrite.txt")
+
+
 # write(in_extractType, "/var/www/html/aiddata/extractinfo.txt")
 
 #prepare paths
@@ -37,7 +47,15 @@ myVector <- readOGR(dir_shapefile, in_fShapefile)
 #load raster
 setwd(dir_raster)
 myRaster <- raster(in_fRaster, crs="+proj=longlat +datum=WGS84 +no_defs")
+
 myRaster[is.na(myRaster)] <- 0 
+
+# write(paste(in_lowerBound, is.numeric(in_lowerBound), in_upperBound, is.numeric(in_upperBound), sep=" - "), "/var/www/html/aiddata/testBoundWrite.txt")
+
+if ( bounds == true & is.numeric(in_lowerBound) & is.numeric(in_upperBound) ){
+	myRaster[myRaster < in_lowerBound] <- 0
+	myRaster[myRaster > in_upperBound] <- 0
+}
 
 #extract raster data
 if (in_extractType == "sum"){
