@@ -13,10 +13,10 @@ switch ($_POST['type']) {
 		echo $out;
 		break;
 
-	case "meta":
-		// var_dump($_POST["raster"]);
-		echo file_get_contents("../../uploads/globals/processed/" . $_POST["raster"] . "/meta_info.json");
-		break;
+	// case "meta":
+	// 	// var_dump($_POST["raster"]);
+	// 	echo file_get_contents("../../uploads/globals/processed/" . $_POST["raster"] . "/meta_info.json");
+	// 	break;
 
 	case "edit":
 		parse_str($_POST['data'], $contents);

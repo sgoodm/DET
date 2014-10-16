@@ -1,0 +1,177 @@
+{
+	"raster_type": {
+		"type": "str", 
+		"required": true,
+		"edit": false
+	}, 
+	"raster_sub": {
+		"type": "str", 
+		"required": true,
+		"edit": false
+	}, 
+	"raster_year": {
+		"type": "num", 
+		"required": true,
+		"edit": false,
+		"options": {
+			"step": 1,
+			"min": false,
+			"max": false
+		}
+	}, 
+	"meta_summary": {
+		"type": "text", 
+		"required": true,
+		"edit": true,
+		"options": {
+			"rows":5,
+			"cols":40,
+			"maxlength":400
+		}
+	}, 
+	"meta_data_provider": {
+		"type": "text",
+		"required": true,
+		"edit": true,
+		"options": {
+			"rows":2,
+			"cols":40,
+			"maxlength":400
+		}
+	}, 
+	"meta_data_provider_website": {
+		"type": "text",
+		"required": true,
+		"edit": true,
+		"options": {
+			"rows":2,
+			"cols":40,
+			"maxlength":400
+		}
+	}, 
+	"meta_year_data_represents": {
+		"type": "num", 
+		"required": true,
+		"edit": true,
+		"options": {
+			"step": 1,
+			"min": false,
+			"max": false
+		}
+	}, 
+	"meta_year_data_produced": {
+		"type": "num", 
+		"required": false,
+		"edit": true,
+		"options": {
+			"step": 1,
+			"min": false,
+			"max": false
+		}
+	}, 
+	"meta_license_terms": {
+		"type": "select", 
+		"required": true,
+		"edit": true,
+		"options": {
+			"values": ["false", "true"],
+			"text":["Can NOT be distributed","Can be distributed"]
+		}
+	}, 
+	"meta_license_terms_website": {
+		"type": "text",
+		"required": true,
+		"edit": true,
+		"options": {
+			"rows":2,
+			"cols":40,
+			"maxlength":400
+		}
+	}, 
+	"meta_version": {
+		"type": "text",
+		"required": false,
+		"edit": true,
+		"options": {
+			"rows":2,
+			"cols":40,
+			"maxlength":400
+		}
+	}, 
+	"meta_variable_interpretation": {
+		"type": "text", 
+		"required": false,
+		"edit": true,
+		"options": {
+			"rows":5,
+			"cols":40,
+			"maxlength":400
+		}
+	}, 
+	"meta_upper_bound": {
+		"type": "num",
+		"required": true,
+		"edit": true,
+		"options": {
+			"step": 0.001,
+			"min": false,
+			"max": false
+		}
+	}, 
+	"meta_lower_bound": {
+		"type": "num",
+		"required": true,
+		"edit": true,
+		"options": {
+			"step": 0.001,
+			"min": false,
+			"max": false
+		}
+	}, 
+	"meta_extract_type": {
+		"type": "select",
+		"required": true,
+		"edit": true,
+		"options": {
+			"values": ["mean", "sum"],
+			"text":["mean","sum"]
+		}
+	},
+	"meta_warnings": {
+		"type": "text", 
+		"required": false,
+		"edit": true,
+		"options": {
+			"rows":5,
+			"cols":40,
+			"maxlength":400
+		},
+		"default": "no warnings"
+	}, 
+	"meta_notes": {
+		"type": "text", 
+		"required": false,
+		"edit": true,
+		"options": {
+			"rows":5,
+			"cols":40,
+			"maxlength":400
+		}
+	}, 
+	"created": {
+		"type": "time", 
+		"required": true,
+		"edit": false,
+		"options": {
+
+		}
+	}, 
+	"modified": {
+		"type": "time", 
+		"required": true,
+		"edit": false,
+		"options": {
+
+		}
+	}
+}

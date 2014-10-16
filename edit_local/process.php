@@ -6,7 +6,7 @@ switch ($_POST['type']) {
 
 	case "scan":
 
-     	$dir = dirname(dirname(__DIR__))."/uploads/globals/local_list.csv";
+     	$dir = dirname(dirname(__DIR__))."/uploads/locals/local_list.csv";
      	
 		$csv = file_get_contents($dir);
 		$rows = array_map("str_getcsv", explode("\n", $csv));
@@ -21,10 +21,10 @@ switch ($_POST['type']) {
 		echo $out;
 		break;
 
-	case "meta":
-		// var_dump($_POST["raster"]);
-		echo file_get_contents("../../resources/" . $_POST["raster"] . "/meta_info.json");
-		break;
+	// case "meta":
+	// 	// var_dump($_POST["raster"]);
+	// 	echo file_get_contents("../../resources/" . $_POST["raster"] . "/meta_info.json");
+	// 	break;
 
 	case "edit":
 		parse_str($_POST['data'], $contents);
