@@ -73,16 +73,18 @@ if (count($r_queue) > 0){
 		} else {
 			$extract_type = "mean";
 		}
-		$lower_bound = ""
-		$upper_bound = ""
-		if (array_key_exists("meta_lower_bound",$meta_grab) && array_key_exists("meta_upper_bound", $meta_grab)){
+		$bounds = "FALSE";
+		$lower_bound = "x";
+		$upper_bound = "x";
+		if (array_key_exists("meta_lower_bound",$meta_grab) && array_key_exists("meta_upper_bound", $meta_grab) && $meta_grab["meta_lower_bound"] != "" && $meta_grab["meta_upper_bound"] != ""){
+			$bounds = "TRUE";
 			$lower_bound = floatval($meta_grab["meta_lower_bound"]);
 			$upper_bound = floatval($meta_grab["meta_upper_bound"]);
 			// file_put_contents("/var/www/html/aiddata/testphpbounds.txt", $lower_bound ." ". $upper_bound);
 		}
 
 		if ( $priority == 0 && !file_exists($COM_DIR ."/resources/". $path_cache ."/". $file_cache) ){
-			$r_vars = $path_shapefile ." ". $file_shapefile ." ".  $path_raster ." ".  $file_raster ." ". $path_cache . " " . $file_cache ." ". $COM_DIR ." ". $extract_type ." ". $lower_bound ." ". $upper_bound;
+			$r_vars = $path_shapefile ." ". $file_shapefile ." ".  $path_raster ." ".  $file_raster ." ". $path_cache . " " . $file_cache ." ". $COM_DIR ." ". $extract_type ." ". $bounds ." ". $lower_bound ." ". $upper_bound;
 			$start_time = time();
 			if ($os == "win"){
 				exec($COM_DIR."\R\bin\Rscript ".$COM_DIR."\www\det.R $r_vars"); //*****DIRECTORY*****

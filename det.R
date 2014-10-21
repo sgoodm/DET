@@ -2,8 +2,6 @@
 #load packages (manually preinstalled)
 library("raster")
 library("rgdal")
-#library("maptools")
-#library("sp")
 library('leafletR')
 
 #read inputs
@@ -18,21 +16,15 @@ in_fCache <- readIn[6]
 in_pBase <- readIn[7]
 in_extractType <- readIn[8]
 
-bounds <- false
-if (readIn[9] != "" & readIn[10] != ""){
-	bounds <- true
-	in_lowerBound <- as.numeric(readIn[9])
-	in_upperBound <- as.numeric(readIn[10])
+in_bounds <- readIn[9]
+
+#set bounds if values were given for raster
+if (in_bounds == "TRUE"){
+	in_lowerBound <- as.numeric(readIn[10])
+	in_upperBound <- as.numeric(readIn[11])
 }
 
-# write(paste(readIn[9], readIn[10], sep=" - "), "/var/www/html/aiddata/testBoundWrite.txt")
-
-
-# write(in_extractType, "/var/www/html/aiddata/extractinfo.txt")
-
 #prepare paths
-#dir_base <- "G:/xampp/htdocs/gis/DET_03/resources/"
-#dir_base <- "/var/www/html/DET_03/resources/"
 dir_base <- paste(in_pBase, "/resources/", sep="")
 dir_shapefile <- paste(dir_base, in_pShapefile, sep="")
 dir_raster <- paste(dir_base, in_pRaster, sep="")
@@ -41,18 +33,17 @@ dir_geojson <- paste(dir_cache, "/geojsons", sep="")
 
 #load shapefile
 setwd(dir_shapefile)
-#myVector <- readShapeSpatial(in_fShapefile, proj4string=CRS("+proj=longlat +datum=WGS84 +no_defs"))
 myVector <- readOGR(dir_shapefile, in_fShapefile)
 
 #load raster
 setwd(dir_raster)
 myRaster <- raster(in_fRaster, crs="+proj=longlat +datum=WGS84 +no_defs")
 
+#remove NA values
 myRaster[is.na(myRaster)] <- 0 
 
-# write(paste(in_lowerBound, is.numeric(in_lowerBound), in_upperBound, is.numeric(in_upperBound), sep=" - "), "/var/www/html/aiddata/testBoundWrite.txt")
-
-if ( bounds == true & is.numeric(in_lowerBound) & is.numeric(in_upperBound) ){
+#remove values outside bounds
+if ( in_bounds == "TRUE" ){
 	myRaster[myRaster < in_lowerBound] <- 0
 	myRaster[myRaster > in_upperBound] <- 0
 }
@@ -61,7 +52,7 @@ if ( bounds == true & is.numeric(in_lowerBound) & is.numeric(in_upperBound) ){
 if (in_extractType == "sum"){
 	myExtract <- extract(myRaster, myVector, fun=sum, sp=TRUE, small=TRUE)
 } else {
-	myExtract <- extract(disaggregate(myRaster, fact=c(4,4)), myVector, fun=sum, sp=TRUE, weights=TRUE, small=TRUE)
+	myExtract <- extract(disaggregate(myRaster, fact=c(4,4)), myVector, fun=mean, sp=TRUE, weights=TRUE, small=TRUE)
 }
 myOutput <- myExtract@data
 
