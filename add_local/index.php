@@ -100,15 +100,15 @@
                 <div class="input_name">Variable Interpretation</div> 
                 <textarea id="meta_variable_interpretation" name="meta_variable_interpretation" rows="3" cols="40" maxlength="10000"></textarea><br>
 
-                <div class="input_name">Upper Bound*
+                <div class="input_name">Upper Bound
                     <img src='../img/meta_info.jpg' class='info' title='upper bound of continuous raster variable'>
                 </div> 
-                <input type="number" id="meta_upper_bound" name="meta_upper_bound" class="required" value="1" step="0.001"><br>
+                <input type="number" id="meta_upper_bound" name="meta_upper_bound" class="" value="1" step="0.001"><br>
                 
-                <div class="input_name">Lower Bound*
+                <div class="input_name">Lower Bound
                     <img src='../img/meta_info.jpg' class='info' title='lower bound of continuous raster variable'>
                 </div> 
-                <input type="number" id="meta_lower_bound" name="meta_lower_bound" class="required" value="0" step="0.001"><br>
+                <input type="number" id="meta_lower_bound" name="meta_lower_bound" class="" value="0" step="0.001"><br>
 
                 <div class="input_name">Extraction Type </div>
                 <select id="meta_extract_type" name="meta_extract_type">

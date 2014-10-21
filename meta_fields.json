@@ -110,7 +110,7 @@
 	}, 
 	"meta_upper_bound": {
 		"type": "num",
-		"required": true,
+		"required": false,
 		"edit": true,
 		"options": {
 			"step": 0.001,
@@ -120,7 +120,7 @@
 	}, 
 	"meta_lower_bound": {
 		"type": "num",
-		"required": true,
+		"required": false,
 		"edit": true,
 		"options": {
 			"step": 0.001,

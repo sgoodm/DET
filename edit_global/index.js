@@ -24,6 +24,8 @@ $(document).ready(function(){
     	global = $(this).val()
 
     	var meta_this = readJSON("../../uploads/globals/processed/" + global + "/meta_info.json")
+   		console.log(meta_this)
+
 
     	$.each(meta_master, function(field, props){
 
@@ -46,7 +48,7 @@ $(document).ready(function(){
 		    		break
 
 		    	case "num": 
-		    		$("#meta_input").append('<input type="number" id="'+ field +'" name="'+ field +'" value="'+ value +'" min='+ props.options.min +' max='+ props.options.max +' step='+ props.options.step +'  '+edit+'>')
+		    		$("#meta_input").append('<input type="number" id="'+ field +'" name="'+ field +'" value="'+ value +'"" min='+ props.options.min +' max='+ props.options.max +' step='+ props.options.step +'  '+edit+'>')
 		    		break
 
 		    	case "select":
@@ -109,7 +111,7 @@ $(document).ready(function(){
 	    var request = $.ajax({
 	    	type: "GET",
 			dataType: "json",
-			url: file,
+			url: file + "?nocache=" + (new Date()).getTime(),
 			async: false,
 	    })
 	    return request.responseJSON

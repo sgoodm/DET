@@ -129,7 +129,7 @@ $(document).ready(function(){
 	    var request = $.ajax({
 	    	type: "GET",
 			dataType: "json",
-			url: file,
+			url: file + "?nocache=" + (new Date()).getTime(),
 			async: false,
 	    })
 	    return request.responseJSON

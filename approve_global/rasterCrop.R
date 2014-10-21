@@ -1,7 +1,3 @@
-#setwd("F:/xampp/htdocs/gis/DET_03/rasterUpload")
-# setwd("/var/www/html/aiddata/DET/rasterUpload")
-# write("00", file="test.txt")
-
 #load packages
 library("raster")
 library("rgdal")
