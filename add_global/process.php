@@ -2,15 +2,6 @@
 
 set_time_limit(0);
 
-if (strpos(strtolower(PHP_OS), "win") !== false){
-	$COM_DIR = substr($_SERVER["DOCUMENT_ROOT"], 0, 1) . ":\/xampp\htdocs\aiddata\DET";
-	$DRIVE = substr($_SERVER["DOCUMENT_ROOT"], 0, 1);
-	$os = "win";
-} else {
-	$COM_DIR = "/var/www/html/aiddata/DET";
-	$os = "lin";
-}
-
 switch ($_POST['type']) {
 	//returns directory contents
 	case 'crop':

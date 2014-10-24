@@ -3,8 +3,18 @@
 set_time_limit(0);
 
 
-$COM_DIR = "/var/www/html/aiddata/DET";
-$MAIL_DIR = "128.239.119.254/aiddata/DET";
+$app = basename(dirname(dirname(__DIR__)));
+if (strpos(strtolower(PHP_OS), "win") !== false){
+	$DRIVE = substr($_SERVER["DOCUMENT_ROOT"], 0, 1);
+	$COM_DIR = $DRIVE . ":\/xampp\htdocs\aiddata\\".$app;
+	$MAIL_DIR = "localhost/aiddata/".$app;	
+	$os = "win";
+} else {
+	$COM_DIR = "/var/www/html/aiddata/".$app;
+	$MAIL_DIR = "128.239.119.254/aiddata/".$app;
+	$os = "lin";
+} 
+
 
 switch ($_POST["type"]) {
 
@@ -56,6 +66,12 @@ switch ($_POST["type"]) {
 		var_dump($r_vars);
 
 		exec("/usr/bin/Rscript ".$COM_DIR."/AMU/update_global/rasterCrop.R $r_vars");
+
+		if ($os == "win"){
+			exec($COM_DIR."\R\bin\Rscript ".$COM_DIR."\AMU\update_global\\rasterCrop.R $r_vars"); //*****DIRECTORY*****
+		} else {
+			exec("/usr/bin/Rscript ".$COM_DIR."/AMU/update_global/rasterCrop.R $r_vars");
+		} 
 
 		//move meta
 		copy($p_raster . "/meta_info.json", $p_output . "/meta_info.json");
