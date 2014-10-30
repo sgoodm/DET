@@ -11,17 +11,20 @@
 set_time_limit(0);
 
 
-$app = basename(dirname(__DIR__));
 
 $os = "lin";
-$COM_DIR = dirname(__DIR__);
-$MAIL_DIR = $_SERVER['SERVER_ADDR'] . substr($COM_DIR, 13);
+$COM_DIR = dirname(__DIR__); //local path to DET dir
+
+$DOMAIN = "128.239.119.254";
+$app = basename($COM_DIR);
+$MAIL_DIR = $DOMAIN . substr($COM_DIR, 13, strpos($COM_DIR, $app)-1); //http to DET dir
 
 if (strpos(strtolower(PHP_OS), "win") !== false){
 	$os = "win";
 	$DRIVE = substr($_SERVER["DOCUMENT_ROOT"], 0, 1);
 	$COM_DIR = $DRIVE . ":\/xampp\htdocs\aiddata\\".$app;
-	$MAIL_DIR = "localhost/aiddata/".$app;	
+	$DOMAIN = "localhost";
+	$MAIL_DIR = $DOMAIN ."/aiddata/". $app;	
 } 
 
 //load queue log and prepare contents
@@ -88,6 +91,7 @@ if (count($r_queue) > 0){
 		if ( $priority == 0 && !file_exists($COM_DIR ."/resources/". $path_cache ."/". $file_cache) ){
 			$r_vars = $path_shapefile ." ". $file_shapefile ." ".  $path_raster ." ".  $file_raster ." ". $path_cache . " " . $file_cache ." ". $COM_DIR ." ". $extract_type ." ". $bounds ." ". $lower_bound ." ". $upper_bound;
 			$start_time = time();
+			
 			if ($os == "win"){
 				exec($COM_DIR."\R\bin\Rscript ".$COM_DIR."\www\det.R $r_vars"); //*****DIRECTORY*****
 			} else {
