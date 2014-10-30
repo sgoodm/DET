@@ -4,22 +4,24 @@
 // ++ handles queue processing when triggered by Cron jobs
 // ++ 
 
-//sudo crontab -e
+//associate cron job 
 // * * * * * flock -n /var/www/html/aiddata/DET/www/getQueue.php /usr/bin/php5 /var/www/html/aiddata/DET/www/getQueue.php
 
 //sets maximum execution time (prevent time out when executing R script)
 set_time_limit(0);
 
+
 $app = basename(dirname(__DIR__));
+
+$os = "lin";
+$COM_DIR = dirname(__DIR__);
+$MAIL_DIR = $_SERVER['SERVER_ADDR'] . substr($COM_DIR, 13);
+
 if (strpos(strtolower(PHP_OS), "win") !== false){
+	$os = "win";
 	$DRIVE = substr($_SERVER["DOCUMENT_ROOT"], 0, 1);
 	$COM_DIR = $DRIVE . ":\/xampp\htdocs\aiddata\\".$app;
 	$MAIL_DIR = "localhost/aiddata/".$app;	
-	$os = "win";
-} else {
-	$COM_DIR = "/var/www/html/aiddata/".$app;
-	$MAIL_DIR = "128.239.119.254/aiddata/".$app;
-	$os = "lin";
 } 
 
 //load queue log and prepare contents
