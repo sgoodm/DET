@@ -2,17 +2,15 @@
 
 set_time_limit(0);
 
-$app = basename(dirname(dirname(__DIR__)));
+$os = "lin";
+$COM_DIR = dirname(dirname(__DIR__)); //local path to DET dir
+
 if (strpos(strtolower(PHP_OS), "win") !== false){
+	$os = "win";
+	$app = basename($COM_DIR);
 	$DRIVE = substr($_SERVER["DOCUMENT_ROOT"], 0, 1);
 	$COM_DIR = $DRIVE . ":\/xampp\htdocs\aiddata\\".$app;
-	$MAIL_DIR = "localhost/aiddata/".$app;	
-	$os = "win";
-} else {
-	$COM_DIR = "/var/www/html/aiddata/".$app;
-	$MAIL_DIR = "128.239.119.254/aiddata/".$app;
-	$os = "lin";
-} 
+}
 
 // var_dump($_POST);
 // var_dump($_FILES);
@@ -52,8 +50,7 @@ foreach ($_FILES as $index => $file) {
 
 $leaf_vars = $COM_DIR."/resources" ." ". $_POST["p_shp"] ." ". $name ." ". $_POST["p_leaf"];
 if ($os == "win"){
-	// var_dump($os);
-	exec($COM_DIR."\R\bin\/x64\Rscript ".$COM_DIR."\/AMU\add_country\leaflet.R $leaf_vars");
+	exec($COM_DIR."\R\bin\/x64\Rscript ".$COM_DIR."\AMU\add_country\leaflet.R $leaf_vars");
 } else {
 	exec("/usr/bin/Rscript ".$COM_DIR."/AMU/add_country/leaflet.R $leaf_vars");
 } 

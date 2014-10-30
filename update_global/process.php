@@ -2,18 +2,15 @@
 
 set_time_limit(0);
 
+$os = "lin";
+$COM_DIR = dirname(dirname(__DIR__)); //local path to DET dir
 
-$app = basename(dirname(dirname(__DIR__)));
 if (strpos(strtolower(PHP_OS), "win") !== false){
+	$os = "win";
+	$app = basename($COM_DIR);
 	$DRIVE = substr($_SERVER["DOCUMENT_ROOT"], 0, 1);
 	$COM_DIR = $DRIVE . ":\/xampp\htdocs\aiddata\\".$app;
-	$MAIL_DIR = "localhost/aiddata/".$app;	
-	$os = "win";
-} else {
-	$COM_DIR = "/var/www/html/aiddata/".$app;
-	$MAIL_DIR = "128.239.119.254/aiddata/".$app;
-	$os = "lin";
-} 
+}
 
 
 switch ($_POST["type"]) {
@@ -65,10 +62,8 @@ switch ($_POST["type"]) {
 		$r_vars = $pr_raster ." ". $f_raster ." ". $pr_shapefile ." ". $f_shapefile ." ". $pr_output ." ". $f_output ." ". $COM_DIR;
 		var_dump($r_vars);
 
-		exec("/usr/bin/Rscript ".$COM_DIR."/AMU/update_global/rasterCrop.R $r_vars");
-
 		if ($os == "win"){
-			exec($COM_DIR."\R\bin\Rscript ".$COM_DIR."\AMU\update_global\\rasterCrop.R $r_vars"); //*****DIRECTORY*****
+			exec($COM_DIR."\R\bin\Rscript ".$COM_DIR."\AMU\update_global\\rasterCrop.R $r_vars");
 		} else {
 			exec("/usr/bin/Rscript ".$COM_DIR."/AMU/update_global/rasterCrop.R $r_vars");
 		} 

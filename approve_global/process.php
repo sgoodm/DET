@@ -2,13 +2,14 @@
 
 set_time_limit(0);
 
+$os = "lin";
+$COM_DIR = dirname(dirname(__DIR__)); //local path to DET dir
+
 if (strpos(strtolower(PHP_OS), "win") !== false){
-	$COM_DIR = substr($_SERVER["DOCUMENT_ROOT"], 0, 1) . ":\/xampp\htdocs\aiddata\DET";
-	$DRIVE = substr($_SERVER["DOCUMENT_ROOT"], 0, 1);
 	$os = "win";
-} else {
-	$COM_DIR = "/var/www/html/aiddata/DET";
-	$os = "lin";
+	$app = basename($COM_DIR);
+	$DRIVE = substr($_SERVER["DOCUMENT_ROOT"], 0, 1);
+	$COM_DIR = $DRIVE . ":\/xampp\htdocs\aiddata\\".$app;
 }
 
 function pDelete($path){
@@ -149,10 +150,10 @@ switch ($_POST['type']) {
 						//create variable for R and run script
 						$r_vars = $p_raster ." ". $f_raster ." ". substr($p_shapefile,5) ." ". $f_shapefile ." ". substr($p_output,5) ." ". $f_output ." ". $COM_DIR;
 
-						if ($os == "lin"){
-							exec("/usr/bin/Rscript /var/www/html/aiddata/DET/AMU/approve_global/rasterCrop.R $r_vars");
-						} else if ($os == "win"){
-							$rx = exec($DRIVE.":\/xampp\htdocs\aiddata\DET\R\bin\Rscript ".$DRIVE.":\/xampp\htdocs\aiddata\DET\/AMU\approve_global\/rasterCrop.R $r_vars");
+						if ($os == "win"){
+							exec($COM_DIR."\R\bin\Rscript ".$COM_DIR."\/AMU\approve_global\/rasterCrop.R $r_vars");
+						} else {
+							exec("/usr/bin/Rscript ".$COM_DIR."/AMU/approve_global/rasterCrop.R $r_vars");
 						}
 						
 					}
