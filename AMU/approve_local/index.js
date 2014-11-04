@@ -30,17 +30,17 @@ $(document).ready(function(){
 	    })
 	}
 
-
+	var local
+	var file
     $("#meta_list").on("change", function(){
 
     	$("#submit, #reject").show()
     	$("#meta_input").empty()
     	$("#blank_meta_list_item").remove()
 
-      	var local = $(this).val()
+      	local = $(this).val()
     	// console.log(local)
 
-    	var file
     	scanDir({ type: "scan", dir: "../../uploads/locals/pending/"+local }, function(files) {
     		$.each(files, function(key, val){
     			if (val != "meta_info.json"){
@@ -89,90 +89,95 @@ $(document).ready(function(){
 			$("#middle").append('<br><br><div class="input_name" >Reason for rejecting:</div>')
 			$("#middle").append('<textarea id="reason" rows="5" cols="40" maxlength="400" ></textarea><br>')	
 		}
-		
- 		//--validation
-		$("#raster_type, #raster_sub").on("change", function(){
-			var val = $(this).val()
-			val = val.replace(/ /g, "_")
-			val = val.toLowerCase()
-			val = val.replace(/[^a-zA-z]/g, '')
-			val = val.replace("__","_")
-			$(this).val(val)
-			console.log($(this).val())
-		})
+	
+	})
 
-		$("#raster_year").on("change", function(){
-			var val = $(this).val()
-			if (val > 9999){
-				$(this).val(9999)
+
+	//--validation
+	$("#raster_type, #raster_sub").on("change", function(){
+		var val = $(this).val()
+		val = val.replace(/ /g, "_")
+		val = val.toLowerCase()
+		val = val.replace(/[^a-zA-z]/g, '')
+		val = val.replace("__","_")
+		$(this).val(val)
+		console.log($(this).val())
+	})
+
+	$("#raster_year").on("change", function(){
+		var val = $(this).val()
+		if (val > 9999){
+			$(this).val(9999)
+		}
+	})
+	//--
+
+    $("#submit").on("click", function(){
+    	
+    	$("#message").html("working...")
+    	$('html, body').animate({ scrollTop: 0 }, 0);
+
+		var required = true
+		$(".required").each(function(){
+			if ($(this).val() == ""){
+				required = false
 			}
 		})
-		//--
 
-	    $("#submit").click(function(){
-	    	
-	    	$("#message").html("working...")
-        	$('html, body').animate({ scrollTop: 0 }, 0);
+		if (required == false){
+			console.log("please complete the required fields")
+			$("#message").html("please complete the required fields")
+            $('html, body').animate({ scrollTop: 0 }, 0);
+			return 
+		}
 
-			var required = true
-			$(".required").each(function(){
-				if ($(this).val() == ""){
-					required = false
-				}
-			})
-
-			if (required == false){
-				console.log("please complete the required fields")
-				$("#message").html("please complete the required fields")
-	            $('html, body').animate({ scrollTop: 0 }, 0);
-				return 
-			}
-
-	    	//console.log( $("#input_form").serialize())
-	    	console.log(local)
-	    	console.log(file)
-			$.ajax ({
-		        url: "process.php",
-		        data: { type: "crop" , local: local, file: file, data: $("#input_form").serialize() },
-		        dataType: "text",
-		        type: "post",
-		        async: false,
-		        success: function(result) {
-		        	console.log(result)
-		        	// window.location = self.location
-		        	$("#message").html("Local has been approved and processed")
-		        	$('html, body').animate({ scrollTop: 0 }, 0);
-		        	resetPage()
-		        	window.location = self.location	
-		        }
-		    })
-
+    	//console.log( $("#input_form").serialize())
+    	console.log(local)
+    	console.log(file)
+		$.ajax ({
+	        url: "process.php",
+	        data: { type: "crop" , local: local, file: file, data: $("#input_form").serialize() },
+	        dataType: "text",
+	        type: "post",
+	        async: false,
+	        success: function(result) {
+	        	console.log(result)
+	        	// window.location = self.location
+	        	$("#message").html("Local has been approved and processed")
+	        	$('html, body').animate({ scrollTop: 0 }, 0);
+	        	// resetPage()
+	        	// window.location = self.location	
+	        	location.reload(true)
+	        }
 	    })
 
-		$("#reject").click(function(){
-
-			$("#message").html("working...")
-        	$('html, body').animate({ scrollTop: 0 }, 0);
-		
-			$.ajax ({
-		        url: "process.php",
-		        data: { type: "reject" , local: local, file: file, reason: $("#reason").val() },
-		        dataType: "text",
-		        type: "post",
-		        async: false,
-		        success: function(result) {
-		        	console.log(result)
-		        	// window.location = self.location
-		        	$("#message").html("Local has been rejected")
-		        	$('html, body').animate({ scrollTop: 0 }, 0);
-		        	resetPage()
-		        	window.location = self.location			        	
-		        }
-		    })
-
-		})
-
     })
+
+	$("#reject").on("click", function(){
+
+		$("#message").html("working...")
+    	$('html, body').animate({ scrollTop: 0 }, 0);
+	
+		$.ajax ({
+	        url: "process.php",
+	        data: { type: "reject" , local: local, file: file, reason: $("#reason").val() },
+	        dataType: "text",
+	        type: "post",
+	        async: false,
+	        success: function(result) {
+	        	console.log(result)
+	        	// window.location = self.location
+	        	$("#message").html("Local has been rejected")
+	        	$('html, body').animate({ scrollTop: 0 }, 0);
+	        	// resetPage()
+	        	// window.location = self.location			        	
+	        	location.reload(true)
+	        }
+	    })
+
+	})
+
+
 
 
 

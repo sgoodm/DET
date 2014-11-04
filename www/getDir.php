@@ -1,7 +1,7 @@
 <?php
 
 // ++
-// ++ handles ajax requests from gisProject.js
+// ++ handles ajax requests from det.js
 // ++
 
 switch ($_POST['type']) {

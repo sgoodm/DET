@@ -1,5 +1,5 @@
 // ++
-// ++ manages user interface for gisProject.php
+// ++ manages user interface for det.php
 // ++
 
 $(document).ready(function(){
@@ -169,15 +169,6 @@ $(document).ready(function(){
 				}
 				output["country"] = $(this).val()
 				addGeo("../resources/"+output.continent+"/"+output.country+"/shapefiles/Leaflet.geojson")
-				// var leafURL = "../resources/"+output.continent+"/"+output.country+"/Shapefiles/Leaflet/Leaflet.html" 
-				// $.ajax({
-				//     url: leafURL,
-				//     type:'HEAD',
-				//     async: false,
-				//     success: function(){	
-				// 		$("#leaflet").html("<iframe src='"+leafURL+"'></iframe>")
-				//     }
-				// })  
 				break;
 
 			case "level":
@@ -190,16 +181,7 @@ $(document).ready(function(){
 					getOptions(path, next_key, -1)
 				}
 				output["level"] = $(this).val()
-				addGeo("../resources/"+output.continent+"/"+output.country+"/shapefiles/"+output.level+"/Leaflet.geojson")
-				// var leafURL = "../resources/"+output.continent+"/"+output.country+"/Shapefiles/"+output.level+"/Leaflet/Leaflet.html" 
-				// $.ajax({
-				//     url: leafURL,
-				//     type:'HEAD',
-				//     async: false,
-				//     success: function(){	
-				// 		$("#leaflet").html("<iframe src='"+leafURL+"'></iframe>")
-				//     }
-				// })  
+				addGeo("../resources/"+output.continent+"/"+output.country+"/shapefiles/"+output.level+"/Leaflet.geojson") 
 				break;
 
 			case "year":
@@ -249,7 +231,6 @@ $(document).ready(function(){
 		$("#data, #output_tools").css("display","none")
 		$("#leaflet").css("display","block")
 		$("#data_table").DataTable().destroy()
-		// $(".FixedHeader_Cloned").remove()
 		$("#data_selection").empty()
 	})
 

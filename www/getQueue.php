@@ -27,8 +27,9 @@ if (strpos(strtolower(PHP_OS), "win") !== false){
 	$MAIL_DIR = $DOMAIN ."/aiddata/". $app;	
 } 
 
+
 //load queue log and prepare contents
-$file = $COM_DIR  . "/queue/pending.csv"; //*****DIRECTORY*****
+$file = $COM_DIR  . "/queue/pending.csv"; 
 $csv = file_get_contents($file);
 $rows = array_map("str_getcsv", explode("\n", $csv));
 $header = array_shift($rows);
@@ -58,7 +59,7 @@ if (count($r_queue) > 0){
 	}
 
 	//get request info for selected request
-	$q_file = $COM_DIR ."/queue/pending/". $next_request .".json"; //*****DIRECTORY*****
+	$q_file = $COM_DIR ."/queue/pending/". $next_request .".json"; 
 	$q_raw = file_get_contents($q_file);
 	$q_data = json_decode($q_raw,true);
 
@@ -91,16 +92,16 @@ if (count($r_queue) > 0){
 		if ( $priority == 0 && !file_exists($COM_DIR ."/resources/". $path_cache ."/". $file_cache) ){
 			$r_vars = $path_shapefile ." ". $file_shapefile ." ".  $path_raster ." ".  $file_raster ." ". $path_cache . " " . $file_cache ." ". $COM_DIR ." ". $extract_type ." ". $bounds ." ". $lower_bound ." ". $upper_bound;
 			$start_time = time();
-			
+
 			if ($os == "win"){
-				exec($COM_DIR."\R\bin\Rscript ".$COM_DIR."\www\det.R $r_vars"); //*****DIRECTORY*****
+				exec($COM_DIR."\R\bin\Rscript ".$COM_DIR."\www\det.R $r_vars"); 
 			} else {
-				exec("/usr/bin/Rscript ".$COM_DIR."/www/det.R $r_vars"); //*****DIRECTORY*****
+				exec("/usr/bin/Rscript ".$COM_DIR."/www/det.R $r_vars"); 
 			} 
 	
 			$end_time = time();
 			$run_time = $end_time - $start_time;
-			$timeHandle = fopen($COM_DIR ."/resources/". $path_cache ."/run_times.csv", "a"); //*****DIRECTORY*****
+			$timeHandle = fopen($COM_DIR ."/resources/". $path_cache ."/run_times.csv", "a"); 
 			$timeData = array($file_cache, $run_time);
 			fputcsv($timeHandle, $timeData);
 		}
@@ -109,7 +110,7 @@ if (count($r_queue) > 0){
 	//--------------------------------------------------
 
 	//create directory and file for request output
-	$outAvailable = $COM_DIR ."/queue/available/". $q_data["queue"] ."/". $q_data["queue"] . ".csv"; //*****DIRECTORY*****
+	$outAvailable = $COM_DIR ."/queue/available/". $q_data["queue"] ."/". $q_data["queue"] . ".csv"; 
 	$outDir = dirname($outAvailable);
 	if (!is_dir($outDir)){
 		$old_mask = umask(0);
@@ -120,7 +121,7 @@ if (count($r_queue) > 0){
 	//open cache files
 	$handles = array();
 	foreach ($cacheList as $key => $value) {
-		$handles[$key] = fopen( $COM_DIR ."/resources/". $value, "r" ); //*****DIRECTORY*****
+		$handles[$key] = fopen( $COM_DIR ."/resources/". $value, "r" ); 
 	}
 
 	//join cache data and put in output file
@@ -141,7 +142,7 @@ if (count($r_queue) > 0){
 	//--------------------------------------------------
 
 	//add request to available list
-	$avail_handle = fopen($COM_DIR ."/queue/available.csv", "a"); //*****DIRECTORY*****
+	$avail_handle = fopen($COM_DIR ."/queue/available.csv", "a"); 
 	$time = time();
 	$duration = (60*60*24*3);
 	$avail_data = array($q_data["queue"], $q_data["priority"], $q_data["request"], $time, $time+$duration, $q_data["email"]);
@@ -149,14 +150,14 @@ if (count($r_queue) > 0){
 	fclose($avail_handle);
 
 	//move pending request file to available folder
-	$move_file = $COM_DIR ."/queue/pending/". $q_data["queue"] . ".json"; //*****DIRECTORY*****
-	$move_data = file_get_contents($COM_DIR ."/queue/pending/". $q_data["queue"] . ".json"); //*****DIRECTORY*****
-	file_put_contents($COM_DIR ."/queue/available/". $q_data["queue"] ."/". $q_data["queue"] . ".json", $move_data); //*****DIRECTORY*****
+	$move_file = $COM_DIR ."/queue/pending/". $q_data["queue"] . ".json"; 
+	$move_data = file_get_contents($COM_DIR ."/queue/pending/". $q_data["queue"] . ".json"); 
+	file_put_contents($COM_DIR ."/queue/available/". $q_data["queue"] ."/". $q_data["queue"] . ".json", $move_data); 
 	unlink($move_file);
 
 	//remove request from pending list
-	$pending_handle = fopen($COM_DIR . "/queue/pending.csv", "r"); //*****DIRECTORY*****
-	$temp_pending_handle = fopen($COM_DIR . "/queue/pending_temp.csv", "w"); //*****DIRECTORY*****
+	$pending_handle = fopen($COM_DIR . "/queue/pending.csv", "r"); 
+	$temp_pending_handle = fopen($COM_DIR . "/queue/pending_temp.csv", "w"); 
 	while ($pRow = fgetcsv($pending_handle)){
 		if ($pRow[0] != $q_data["queue"]){
 			fputcsv($temp_pending_handle, $pRow);
@@ -164,13 +165,13 @@ if (count($r_queue) > 0){
 	}
 	fclose($pending_handle);
 	fclose($temp_pending_handle);
-	$temp_pending_contents = file_get_contents($COM_DIR . "/queue/pending_temp.csv"); //*****DIRECTORY*****
-	file_put_contents($COM_DIR . "/queue/pending.csv", $temp_pending_contents); //*****DIRECTORY*****
-	unlink($COM_DIR . "/queue/pending_temp.csv"); //*****DIRECTORY*****
+	$temp_pending_contents = file_get_contents($COM_DIR . "/queue/pending_temp.csv"); 
+	file_put_contents($COM_DIR . "/queue/pending.csv", $temp_pending_contents); 
+	unlink($COM_DIR . "/queue/pending_temp.csv"); 
 
 	//update request in log list with completion time
-	$log_handle = fopen($COM_DIR . "/queue/log.csv", "r"); //*****DIRECTORY*****
-	$temp_log_handle = fopen($COM_DIR . "/queue/log_temp.csv", "w"); //*****DIRECTORY*****
+	$log_handle = fopen($COM_DIR . "/queue/log.csv", "r"); 
+	$temp_log_handle = fopen($COM_DIR . "/queue/log_temp.csv", "w"); 
 	while ($logRow = fgetcsv($log_handle)){
 		if ($logRow[0] == $q_data["queue"]){
 			$logRow[3] = $time;
@@ -182,17 +183,17 @@ if (count($r_queue) > 0){
 	}
 	fclose($log_handle);
 	fclose($temp_log_handle);
-	$temp_log_contents = file_get_contents($COM_DIR . "/queue/log_temp.csv"); //*****DIRECTORY*****
-	file_put_contents($COM_DIR . "/queue/log.csv", $temp_log_contents); //*****DIRECTORY*****
-	unlink($COM_DIR . "/queue/log_temp.csv"); //*****DIRECTORY*****
+	$temp_log_contents = file_get_contents($COM_DIR . "/queue/log_temp.csv"); 
+	file_put_contents($COM_DIR . "/queue/log.csv", $temp_log_contents); 
+	unlink($COM_DIR . "/queue/log_temp.csv"); 
 
 	//--------------------------------------------------
 
 	//create zip files (shapfile and full results)
 
-	$zipBase = $COM_DIR ."/queue/available/". $q_data["queue"] ."/"; //*****DIRECTORY*****
+	$zipBase = $COM_DIR ."/queue/available/". $q_data["queue"] ."/"; 
 	
-	$dirShp = $COM_DIR .'/resources/'. $q_data["parent"]; //*****DIRECTORY*****
+	$dirShp = $COM_DIR .'/resources/'. $q_data["parent"]; 
 	$sterms = false;
 	$sterms_meta = json_decode(file_get_contents($dirShp."/meta_info.json"), true);
 	$sterms = $sterms_meta["terms"];
@@ -232,7 +233,7 @@ if (count($r_queue) > 0){
 			$rterms[$r] = $rterms_meta["meta_license_terms"];
 			
 			if ($rterms[$r] == "true"){
-				$zipAll->addFile($COM_DIR .'/resources/'. $raster, "raw_data/rasters/" . $q_data["rfile"][$r]); //*****DIRECTORY*****
+				$zipAll->addFile($COM_DIR .'/resources/'. $raster, "raw_data/rasters/" . $q_data["rfile"][$r]); 
 			}
 		}
 	}
@@ -297,7 +298,7 @@ if (count($r_queue) > 0){
 	</html>
 	';
 
-	file_put_contents($COM_DIR ."/queue/available/". $q_data["queue"] ."/". $q_data["queue"] . ".html", $result_page); //*****DIRECTORY*****
+	file_put_contents($COM_DIR ."/queue/available/". $q_data["queue"] ."/". $q_data["queue"] . ".html", $result_page); 
 
 	//--------------------------------------------------
 
