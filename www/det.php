@@ -35,11 +35,7 @@
 </head>
 
 <body>
-    <div id="top">
-        <!-- <div id="top_container"> -->
-            <img src="img/top.jpg">
-        <!-- </div> -->
-    </div>
+
 
     <div id="middle">
         <div id="banner">Data Extraction Tool</div>
@@ -124,12 +120,6 @@
             <br>
             <button id="return" type="button">Return</button>
         </div>
-    </div>
-
-    <div id="bottom">
-        <!-- <div id="bottom_container"> -->
-            <img src="img/bottom.jpg">
-        <!-- </div> -->
     </div>
 
 
