@@ -21,9 +21,21 @@ $(document).ready(function(){
 			$(this).val(9999)
 		}
 	})
+
+	// var exists
+	// $("#level").on("change", function(){
+	// 	var val = $(this).val()
+
+	// 	exists = false
+	// 	if ( $("#ADM"+val).length ){
+	// 		exists = true
+	// 	}
+
+	// })
+
 	//--
 
-	function scanDir(data, callback){
+	function process(data, callback){
 		$.ajax ({
 	        url: "process.php",
 	        data: data,
@@ -41,7 +53,7 @@ $(document).ready(function(){
 	$("#gadm_country_list").append('<option id="blank_gadm_country_list_item" class="gadm_country_list_item" value="-----">Select Country to Add GADM to</option>')
 
 	var continents = []
-	scanDir({ type: "scan", dir: "../../resources" }, function(options){
+	process({ type: "scan", dir: "../../resources" }, function(options){
 		    for (var op in options){
 		        continents.push(options[op]) 
 		    }
@@ -49,7 +61,7 @@ $(document).ready(function(){
 	
 	//var countries = []
 	for (var c in continents){
-		scanDir({ type: "scan", dir: "../../resources/"+continents[c] }, function(options){
+		process({ type: "scan", dir: "../../resources/"+continents[c] }, function(options){
 			    for (var op in options){
 	        		$("#gadm_country_list").append('<option class="gadm_country_list_item" value="'+continents[c]+'/'+options[op]+'">'+continents[c]+'/'+options[op]+'</option>')
 			    }
@@ -70,14 +82,14 @@ $(document).ready(function(){
 
     	cc = $(this).val()
 
-    	scanDir({type: "scan", dir: "../../resources/"+cc+"/shapefiles"}, function(options){
+    	process({type: "scan", dir: "../../resources/"+cc+"/shapefiles"}, function(options){
 			    for (var op in options){
-			        if (options[op].indexOf(".")==-1 && options[op].indexOf("_") == 1){
+			        if (options[op].indexOf(".")==-1 && (options[op].indexOf("_") == 1 || options[op].indexOf("ADM") == 0)){
 			        	//console.log(options[op]) 
-			        	$("#info").prepend('<input type="text" value="'+ options[op] +'" readonly>')
+			        	$("#info").prepend('<input type="text" id="'+ options[op] +'" value="'+ options[op] +'" readonly>')
 			    	}
 			    }
-			    $("#info").prepend('<div class="input_name">Existing GADM</div>')
+			    $("#info").prepend('<div class="input_name">Existing ADM</div>')
 
     	})
 
@@ -102,7 +114,14 @@ $(document).ready(function(){
 			return 
 		}
 
-		var path = "../../resources/" + cc + "/shapefiles/" + $("#level").val() +"_"+ $("#name").val() +"/"+ $("#year").val()
+		// if (exists == true && !confirm("This ADM and year exists. Do you want to overwrite it?")){
+		// 	console.log("This level ADM already exists")
+		// 	$("#message").html("please select a new ADM")
+  //           $('html, body').animate({ scrollTop: 0 }, 0);
+		// 	return
+		// }
+
+		var path = "../../resources/" + cc + "/shapefiles/ADM" + $("#level").val() +"/"+ $("#year").val()
 
   		var files = $("#file")[0]["files"];
 		console.log(files);
@@ -113,8 +132,8 @@ $(document).ready(function(){
 			formData.append(file.name, file);
     	}
 		formData.append( "dir", path )
-		formData.append( "p_shp", "/" + cc + "/shapefiles/" + $("#level").val() +"_"+ $("#name").val() +"/"+ $("#year").val() )
-		formData.append( "p_leaf", "/" + cc + "/shapefiles/" + $("#level").val() +"_"+ $("#name").val() )
+		formData.append( "p_shp", "/" + cc + "/shapefiles/ADM" + $("#level").val() +"/"+ $("#year").val() )
+		formData.append( "p_leaf", "/" + cc + "/shapefiles/ADM" + $("#level").val() )
 		formData.append( "meta", $("#input_form").serialize())
 
 	  	$.ajax({

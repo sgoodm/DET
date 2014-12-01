@@ -29,6 +29,7 @@ $(document).ready(function(){
 			$(this).val(9999)
 		}
 	})
+
 	//--
 
     $("#submit").click(function(){
@@ -57,7 +58,7 @@ $(document).ready(function(){
 
 		//check if country exists
 		var exists = false
-		scanDir({ type: "scan", dir: "../../resources/"+ path.continent  +"/"+ path.country }, function(options){
+		process({ type: "scan", dir: "../../resources/"+ path.continent  +"/"+ path.country }, function(options){
 			if (options != null && options.length>0){
 				exists = true
 			}
@@ -73,7 +74,14 @@ $(document).ready(function(){
 		path.cache = "../../resources/" + cc + "/cache"
 		path.rasters = "../../resources/" + cc + "/data/rasters"
 		path.shapefiles = "../../resources/" + cc + "/shapefiles"
-		scanDir({type: "build", cache: path.cache, rasters: path.rasters, shapefiles: path.shapefiles, continent: path.continent, country: path.country}, function(x){})
+		process({
+			type: "build", 
+			cache: path.cache, 
+			rasters: path.rasters, 
+			shapefiles: path.shapefiles, 
+			continent: path.continent, 
+			country: path.country
+		}, function(x){})
 
 		//load country shapefile
   		var files = $("#c_file")[0]["files"];
@@ -97,14 +105,14 @@ $(document).ready(function(){
 			var shp = shps[f]
 			shpData.append(shp.name, shp);
     	}
-		shpData.append( "dir", path.shapefiles +"/"+ $("#level").val() +"_"+ $("#name").val() +"/"+ $("#year").val() )
-		shpData.append( "p_shp", "/" + cc + "/shapefiles/"+ $("#level").val() +"_"+ $("#name").val() +"/"+ $("#year").val() )
-		shpData.append( "p_leaf", "/" + cc + "/shapefiles" +"/"+ $("#level").val() +"_"+ $("#name").val() )
+		shpData.append( "dir", path.shapefiles +"/ADM"+ $("#level").val() +"/"+ $("#year").val() )
+		shpData.append( "p_shp", "/" + cc + "/shapefiles/ADM" + $("#level").val() +"/"+ $("#year").val() )
+		shpData.append( "p_leaf", "/" + cc + "/shapefiles/ADM"+ $("#level").val())
 		shpData.append( "meta", $("#g_input_form").serialize())
 		uploadFiles(shpData, function(x){})
     })
 
-	function scanDir(data, callback){
+	function process(data, callback){
 		$.ajax ({
 	        url: "process.php",
 	        data: data,

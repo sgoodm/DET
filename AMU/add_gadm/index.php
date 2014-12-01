@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>AMU - Add GADM</title> 
+    <title>AMU - Add ADM</title> 
 
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 

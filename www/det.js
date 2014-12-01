@@ -83,12 +83,10 @@ $(document).ready(function(){
 
 	//populate "tier" select list with valid "options"  (manages ajax results for shapefile selection)
 	function buildSelect(tier, options){
-		var x
+		var x = 0
 		if (tier == "level"){
-			x = 2
-		} else{
-			x = 0
-		}
+			// x = 2
+		} 
 		$("#list_"+tier).append('<option value="-----" selected="selected" >-----</option>')
 	    for (op in options){
 	    	if (x == 2 && options[op].indexOf("_") == 1){
@@ -118,7 +116,7 @@ $(document).ready(function(){
 	//scan directory for selector options
 	function getOptions(input, key, build){
 	    $.ajax ({
-	        url: "getDir.php",
+	        url: "process.php",
 	        data: { type : "dir", action : input },
 	        dataType: "json",
 	        type: "post",
@@ -421,7 +419,7 @@ $(document).ready(function(){
 	//scan resource directory for data related fields
 	function getData(input, build){
 	    $.ajax ({
-	        url: "getDir.php",
+	        url: "process.php",
 	        data: { type : "dir", action : input },
 	        dataType: "json",
 	        type: "post",
@@ -452,7 +450,7 @@ $(document).ready(function(){
 	//get text for table tooltips
 	function getText(dir, callback){
 	    $.ajax ({
-	        url: "getDir.php",
+	        url: "process.php",
 	        data: { type : "text", action : dir },
 	        dataType: "text",
 	        type: "post",
@@ -574,7 +572,7 @@ $(document).ready(function(){
 			
 			//send confirmation email
 		    $.ajax ({
-		        url: "getDir.php",
+		        url: "process.php",
 		        data: { type : "email", email: output.email, queue: output.queue, message: confirmHTML },
 		        type: "post",
 		        dataType: "text",
@@ -598,7 +596,7 @@ $(document).ready(function(){
 	//ajax function to read queue contents
 	function getQueue(call, callback){
 	    $.ajax ({
-	        url: "getDir.php",
+	        url: "process.php",
 	        data: { type : "read", call: call },
 	        type: "post",
 	        dataType: "json",
@@ -613,7 +611,7 @@ $(document).ready(function(){
 	function buildQueue(){
 		var json_output = JSON.stringify(output)
 	    $.ajax ({
-	        url: "getDir.php",
+	        url: "process.php",
 	        data: { type : "write", action : json_output },
 	        dataType: "text",
 	        type: "post",
