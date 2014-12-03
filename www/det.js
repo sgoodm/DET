@@ -286,6 +286,8 @@ $(document).ready(function(){
 			buildDateSelector("date_end", 2100, 1950)
 			year_min = 2000
 			year_max = 2050
+			$('#date_start').val(year_min)
+			$('#date_end').val(year_max)
 		} else {
 			year_min = parseInt($("#date_start").val())
 			year_max = parseInt($("#date_end").val())
@@ -401,13 +403,13 @@ $(document).ready(function(){
 	    	var $header = $(this)
 	    	getText("../resources/"+rowID+"/meta_info.txt", function(meta){
 				if (meta != "null") {
-	    			$header.append("<img src='img/meta_info.jpg' class='info' title='"+meta+"'>")
+	    			$header.append("<img src='/aiddata/imgs/meta_info.jpg' class='info' title='"+meta+"'>")
 	    		}
 	    		$
 	    	})
 	   		//getText("../resources/"+rowID+"/meta_note.txt", function(meta){
 	   		//	if (meta != "null") {
-			// 		$header.append("<img src='img/meta_note.jpg' class='info' title='"+meta+"'>")	    		
+			// 		$header.append("<img src='/aiddata/imgs/meta_note.jpg' class='info' title='"+meta+"'>")	    		
 			// 	}
 	   		//})
 	    })

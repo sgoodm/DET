@@ -5,7 +5,7 @@
 // ++ 
 
 //init markdown lib
-require_once dirname(__DIR__).'/libs/Michelf/MarkdownExtra.inc.php';
+require_once dirname(dirname(__DIR__)).'/libs/Michelf/MarkdownExtra.inc.php';
 use \Michelf\MarkdownExtra;
 $parser = new MarkdownExtra();
 
@@ -39,7 +39,7 @@ $doc_string .= "<style>
 					}
 				</style>";
 
-$doc_string .= "<div id='logo'><img src='".$COM_DIR."/www/img/logo.jpg'/></div>\n";				
+$doc_string .= "<div id='logo'><img src='".dirname($COM_DIR)."/imgs/logo.jpg'/></div>\n";				
 $doc_string .= "<h1>DOCUMENTATION</h1> \n";
 
 // 1.0 General
@@ -142,7 +142,7 @@ $doc_html = $parser->transform($doc_string);
 file_put_contents($COM_DIR ."/queue/available/". $q_data["queue"] ."/documentation.html", $doc_html);
 
 //convert html to pdf
-include dirname(__DIR__).'/libs/mpdf/mpdf.php';
+include dirname(dirname(__DIR__)).'/libs/mpdf/mpdf.php';
 $mpdf = new mPDF();
 $mpdf->WriteHTML($doc_html);
 $mpdf->Output($COM_DIR ."/queue/available/". $q_data["queue"] ."/documentation.pdf", "F");
