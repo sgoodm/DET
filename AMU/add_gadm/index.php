@@ -40,7 +40,7 @@
                     <option val="8">8</option>
                     <option val="9">9</option>
                 </select>
-                <div class="input_name">New GADM Name <img src='../img/meta_note.jpg' class='info' title='case sensitive. must be a single word'></div>
+                <div class="input_name">New GADM Name <img src='/aiddata/imgs/meta_note.jpg' class='info' title='case sensitive. must be a single word'></div>
                 <input type="text" id="name" name="name" class="required" value="" >
                 <div class="input_name">GADM Shapefile</div>
                 <input type="file" id="file" class="required" value="" multiple>

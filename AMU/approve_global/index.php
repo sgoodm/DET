@@ -24,7 +24,7 @@
     <div id="middle">
 
        <div>List of Submitted Globals
-            <img src='../img/meta_info.jpg' class='info' title='list of all global rasters with meta info'>
+            <img src='/aiddata/imgs/meta_info.jpg' class='info' title='list of all global rasters with meta info'>
         </div>
 
         <select id="meta_list"></select>

@@ -26,31 +26,31 @@
         <form id="input_form" >
             <div class="inputs">
                 <div class="input_name">Raster File*
-                    <img src='../img/meta_info.jpg' class='info' title='upload global raster file'>
+                    <img src='/aiddata/imgs/meta_info.jpg' class='info' title='upload global raster file'>
                 </div> 
                 <input type="file" id="raster_file" name="raster_file" class="required" value=""><br> 
                 <!-- <input type="text" id="raster_file" name="raster_file" value=""><br>  -->
 
                 <div class="input_name">Type*
-                    <img src='../img/meta_info.jpg' class='info' title='input type classification of raster data'>
-                    <img src='../img/meta_note.jpg' class='info' title='case sensitive. use underscores instead of spaces. no numbers or symbols'>
+                    <img src='/aiddata/imgs/meta_info.jpg' class='info' title='input type classification of raster data'>
+                    <img src='/aiddata/imgs/meta_note.jpg' class='info' title='case sensitive. use underscores instead of spaces. no numbers or symbols'>
                 </div> 
                 <input type="text" id="raster_type" name="raster_type" class="required" value=""><br> 
                 
                 <div class="input_name">Sub*
-                    <img src='../img/meta_info.jpg' class='info' title='input sub type classification of raster data'>
-                    <img src='../img/meta_note.jpg' class='info' title='case sensitive. use underscores instead of spaces. no numbers or symbols'>
+                    <img src='/aiddata/imgs/meta_info.jpg' class='info' title='input sub type classification of raster data'>
+                    <img src='/aiddata/imgs/meta_note.jpg' class='info' title='case sensitive. use underscores instead of spaces. no numbers or symbols'>
                 </div> 
                  <input type="text" id="raster_sub" name="raster_sub" class="required" value=""><br> 
                 
                 <div class="input_name">Year*
-                    <img src='../img/meta_info.jpg' class='info' title='input year of raster data'>
+                    <img src='/aiddata/imgs/meta_info.jpg' class='info' title='input year of raster data'>
                 </div> 
                 <input type="number" id="raster_year" name="raster_year" class="required" value="" min="0" max="9999"><br>
 
               <!--   <div class="input_name">Name
-                    <img src='../img/meta_info.jpg' class='info' title='input name of raster data (becomes new file name for raster. will use existing file name if left blank)'>
-                    <img src='../img/meta_note.jpg' class='info' title='use underscores instead of spaces. no symbols'>
+                    <img src='/aiddata/imgs/meta_info.jpg' class='info' title='input name of raster data (becomes new file name for raster. will use existing file name if left blank)'>
+                    <img src='/aiddata/imgs/meta_note.jpg' class='info' title='use underscores instead of spaces. no symbols'>
                 </div> 
                 <input type="text" id="raster_name" name="raster_name" value=""><br> -->
                 
@@ -87,12 +87,12 @@
                 <textarea id="meta_variable_interpretation" name="meta_variable_interpretation" rows="3" cols="40" maxlength="10000"></textarea><br>
                 
                 <div class="input_name">Upper Bound
-                    <img src='../img/meta_info.jpg' class='info' title='upper bound of continuous raster variable'>
+                    <img src='/aiddata/imgs/meta_info.jpg' class='info' title='upper bound of continuous raster variable'>
                 </div> 
                 <input type="number" id="meta_upper_bound" name="meta_upper_bound" class="" value="" step="0.001"><br>
                 
                 <div class="input_name">Lower Bound
-                    <img src='../img/meta_info.jpg' class='info' title='lower bound of continuous raster variable'>
+                    <img src='/aiddata/imgs/meta_info.jpg' class='info' title='lower bound of continuous raster variable'>
                 </div> 
                 <input type="number" id="meta_lower_bound" name="meta_lower_bound" class="" value="" step="0.001"><br>
 

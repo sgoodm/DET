@@ -24,7 +24,7 @@
     <div id="middle">
 
         <div>Global Raster List
-            <img src='../img/meta_info.jpg' class='info' title='list of all global rasters'>
+            <img src='/aiddata/imgs/meta_info.jpg' class='info' title='list of all global rasters'>
         </div>
 
         <select id="global_list"></select>

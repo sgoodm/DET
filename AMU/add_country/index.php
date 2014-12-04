@@ -24,9 +24,9 @@
 
         <div id="input" class="inputs">
             <form id="input_form">
-                <div class="input_name">New Country <img src='../img/meta_note.jpg' class='info' title='case sensitive. use underscores instead of spaces'></div>
+                <div class="input_name">New Country <img src='/aiddata/imgs/meta_note.jpg' class='info' title='case sensitive. use underscores instead of spaces'></div>
                 <input type="text" id="country" name="country" class="required" value="" >
-                <div class="input_name">New Continent <img src='../img/meta_note.jpg' class='info' title='case sensitive. use underscores instead of spaces'></div>
+                <div class="input_name">New Continent <img src='/aiddata/imgs/meta_note.jpg' class='info' title='case sensitive. use underscores instead of spaces'></div>
                 <input type="text" id="continent" name="continent" class="required" value="" >
                 <div class="input_name">Country Shapefile</div>
                 <input type="file" id="c_file" class="required" value="" multiple>
@@ -55,7 +55,7 @@
                     <option val="9">9</option>
                 </select>
                 <!-- <input type="text" id="level" name="level" class="required" value="" > -->
-                <div class="input_name">New GADM Name <img src='../img/meta_note.jpg' class='info' title='case sensitive. must be a single word'></div>
+                <div class="input_name">New GADM Name <img src='/aiddata/imgs/meta_note.jpg' class='info' title='case sensitive. must be a single word'></div>
                 <input type="text" id="name" name="name" class="required" value="" >
                 <div class="input_name">GADM Shapefile</div>
                 <input type="file" id="file" class="required" value="" multiple>

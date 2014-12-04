@@ -23,7 +23,7 @@
     <div id="middle">
 
         <div>Local Meta List
-            <img src='../img/meta_info.jpg' class='info' title='list of all locals rasters with meta info'>
+            <img src='/aiddata/imgs/meta_info.jpg' class='info' title='list of all locals rasters with meta info'>
         </div>
 
         <select id="meta_list"></select>
