@@ -58,7 +58,7 @@ myOutput <- myExtract@data
 
 #output to csv
 setwd(dir_cache)
-write.table(myOutput, in_fCache, quote=F, row.names=F, sep=",")
+write.table(myOutput, in_fCache, quote=T, row.names=F, sep=",")
 
 #create geojson for mapping applications
 setwd(dir_geojson)

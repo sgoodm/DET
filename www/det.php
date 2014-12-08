@@ -53,92 +53,92 @@
 
 
     <!-- <div id="middle"> -->
-        <div id="banner">Data Extraction Tool</div>
-        <div id="message">Choose Shapefile Details</div>
-        <div id="content">
-            <div id="left">
-                <div id="input_tools">
-                    <div id="list_input">
-                        <div>
-                            <div class="list_name">Continent
-                                <img src='/aiddata/imgs/meta_info.jpg' class='info' title='select continent'>
-                            </div>
-                            <select id="list_continent" class="list_item" ></select>
-                        </div>
-                        <div>
-                            <div class="list_name">Country
-                                <img src='/aiddata/imgs/meta_info.jpg' class='info' title='select country'>
-                            </div>
-                            <select id="list_country"   class="list_item" ></select>
-                        </div>
-                        <div>
-                            <div class="list_name">Level
-                            <img src='/aiddata/imgs/meta_info.jpg' class='info' title='select global administrative level'>
-                            </div>
-                            <select id="list_level"     class="list_item" ></select>
-                        </div>
-                        <div>
-                            <div class="list_name">Boundary Year
-                            <img src='/aiddata/imgs/meta_info.jpg' class='info' title='select boundary year of the global administrative level'>
-                            </div>
-                            <select id="list_year"      class="list_item" ></select>
-                        </div>
-                    </div>
-
+    <div id="banner">Data Extraction Tool</div>
+    <div id="message">Choose Shapefile Details</div>
+    <div id="content">
+        <div id="left">
+            <div id="input_tools">
+                <div id="list_input">
                     <div>
-                        <button id="submit"  type="button" style="visibility:hidden;">Next >></button> 
+                        <div class="list_name">Continent
+                            <img src='/aiddata/imgs/meta_info.jpg' class='info' title='select continent'>
+                        </div>
+                        <select id="list_continent" class="list_item" ></select>
                     </div>
-
                     <div>
-                        <button id="restart" type="button" style="visibility:hidden">Restart</button>         
+                        <div class="list_name">Country
+                            <img src='/aiddata/imgs/meta_info.jpg' class='info' title='select country'>
+                        </div>
+                        <select id="list_country"   class="list_item" ></select>
                     </div>
-                </div>         
-
-                <div id="output_tools" style="display:none">
-                    <label><input type="checkbox" id="raw_data" value="raw_data" >Include Raw Data Files</label>
-                    <img src='/aiddata/imgs/meta_info.jpg' class='info' title="shapefile & rasters. Some raw data may not be available for distribution due to the data provider's terms of use. See the documentation provided with your request results for more details on the licenses associated with selected data">
-                    <br>
-                    <br>
-                    Email: <input type="text" id="user_email" value="">
-                    <br>
-                    <br>
-                    <button id="request"  type="button" disabled="true">Submit Request</button> 
+                    <div>
+                        <div class="list_name">Level
+                        <img src='/aiddata/imgs/meta_info.jpg' class='info' title='select global administrative level'>
+                        </div>
+                        <select id="list_level"     class="list_item" ></select>
+                    </div>
+                    <div>
+                        <div class="list_name">Boundary Year
+                        <img src='/aiddata/imgs/meta_info.jpg' class='info' title='select boundary year of the global administrative level'>
+                        </div>
+                        <select id="list_year"      class="list_item" ></select>
+                    </div>
                 </div>
+
+                <div>
+                    <button id="submit"  type="button" style="visibility:hidden;">Next >></button> 
+                </div>
+
+                <div>
+                    <button id="restart" type="button" style="visibility:hidden">Restart</button>         
+                </div>
+            </div>         
+
+            <div id="output_tools" style="display:none">
+                <label><input type="checkbox" id="raw_data" value="raw_data" >Include Raw Data Files</label>
+                <img src='/aiddata/imgs/meta_info.jpg' class='info' title="shapefile & rasters. Some raw data may not be available for distribution due to the data provider's terms of use. See the documentation provided with your request results for more details on the licenses associated with selected data">
+                <br>
+                <br>
+                Email: <input type="text" id="user_email" value="">
+                <br>
+                <br>
+                <button id="request"  type="button" disabled="true">Submit Request</button> 
             </div>
-
-            <div id="right">
-               <div id="leaflet">
-               </div>
-               <div id="data" style="display:none">
-                   <div id="date_input">
-                        Start: <select id="date_start"></select> - End: <select id="date_end"></select>
-                        <button id="update" type="button" >Update</button> 
-                    </div>
-
-                    <div id="data_selection">
-                        
-                    </div>
-
-                </div>
-                <div id="loading" style="display:none">
-                    <img src='/aiddata/imgs/loading.gif'>
-                </div>
-            </div>
-        <!-- </div> -->
-
-        <div id="confirm_loading" style="display:none">
-            <img src='/aiddata/imgs/loading.gif'>
         </div>
-        
-        <div id="confirmation" style="display:none;">
-        
-            <div id="confirm_text">
+
+        <div id="right">
+           <div id="leaflet">
+           </div>
+           <div id="data" style="display:none">
+               <div id="date_input">
+                    Start: <select id="date_start"></select> - End: <select id="date_end"></select>
+                    <button id="update" type="button" >Update</button> 
+                </div>
+
+                <div id="data_selection">
+                    
+                </div>
+
             </div>
-            <br>
-            <button id="return" type="button">Return</button>
-        
+            <div id="loading" style="display:none">
+                <img src='/aiddata/imgs/loading.gif'>
+            </div>
         </div>
     </div>
+
+    <div id="confirm_loading" style="display:none">
+        <img src='/aiddata/imgs/loading.gif'>
+    </div>
+    
+    <div id="confirmation" style="display:none;">
+    
+        <div id="confirm_text">
+        </div>
+        <br>
+        <button id="return" type="button">Return</button>
+    
+    </div>
+    <!-- </div> -->
 
     <div id="navbar_spacer"></div>
 
