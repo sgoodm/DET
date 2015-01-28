@@ -15,7 +15,7 @@ set_time_limit(0);
 $os = "lin";
 $COM_DIR = dirname(__DIR__); //local path to DET dir
 
-$DOMAIN = "128.239.119.254";
+$DOMAIN = "128.239.22.137";
 $app = basename($COM_DIR);
 $MAIL_DIR = $DOMAIN . substr($COM_DIR, 13, strpos($COM_DIR, $app)-1); //http to DET dir
 

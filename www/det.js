@@ -367,6 +367,16 @@ $(document).ready(function(){
 			var cb_click_explode = cb_click.split("/")
 			var newFile = newType+"/"+cb_click
 			getData(newFile,4)
+			// console.log(file_data)
+			var temp_file_data;
+			if ( _.isArray(_.values(file_data))  ) {
+				for ( var i = 0, ix = _.values(file_data).length; i < ix; i++) {
+					console.log( _.values(file_data)[i] )
+					if ( _.values(file_data)[i] != 'meta_info.json') {
+						temp_file_data = _.values(file_data)[i];
+					}
+				}
+			}
 			var fileOut = newFile+"/"+file_data[2]
 			var dataExists = output["raster"].indexOf(fileOut)
 			var cb_id = "#"+ (cb_click.split("/")).join("\\/")
@@ -384,9 +394,10 @@ $(document).ready(function(){
 				output["rsub"].push(cb_click_explode[1])
 				output["ryear"].push(cb_click_explode[2])
 				output["rparent"].push(newFile)
-				output["rfile"].push(file_data[2])
+				output["rfile"].push(temp_file_data)
 				output["raster"].push(fileOut)
 			}
+			// console.log(output)
 			validRequest()
 		})
 
@@ -543,6 +554,7 @@ $(document).ready(function(){
 
 	//confirm and process request
 	function confirmRequest(){
+		// console.log(output);
 		if(confirm("Send request results to " + output.email + "?")){
 			$("#message").html("Submitting Request...")
 			hideShow("#content", "#confirm_loading")
