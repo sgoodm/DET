@@ -79,12 +79,21 @@ if (count($r_queue) > 0){
 		} else {
 			$extract_type = "mean";
 		}
-		$bounds = "FALSE";
+		$bounds = "NONE";
 		$lower_bound = "x";
 		$upper_bound = "x";
-		if (array_key_exists("meta_lower_bound",$meta_grab) && array_key_exists("meta_upper_bound", $meta_grab) && $meta_grab["meta_lower_bound"] != "" && $meta_grab["meta_upper_bound"] != ""){
-			$bounds = "TRUE";
+		if ( array_key_exists("meta_lower_bound",$meta_grab) && $meta_grab["meta_lower_bound"] != "" ){
+			$bounds = "LOWER";
 			$lower_bound = floatval($meta_grab["meta_lower_bound"]);
+			// file_put_contents("/var/www/html/aiddata/testphpbounds.txt", $lower_bound ." ". $upper_bound);
+		}
+		if ( array_key_exists("meta_upper_bound", $meta_grab)  && $meta_grab["meta_upper_bound"] != ""){
+			if ( $bounds == "LOWER") {
+				$bounds = "BOTH";
+			} else {
+				$bounds = "UPPER";
+			}
+
 			$upper_bound = floatval($meta_grab["meta_upper_bound"]);
 			// file_put_contents("/var/www/html/aiddata/testphpbounds.txt", $lower_bound ." ". $upper_bound);
 		}

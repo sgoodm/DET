@@ -377,7 +377,7 @@ $(document).ready(function(){
 					}
 				}
 			}
-			var fileOut = newFile+"/"+file_data[2]
+			var fileOut = newFile+"/"+temp_file_data;
 			var dataExists = output["raster"].indexOf(fileOut)
 			var cb_id = "#"+ (cb_click.split("/")).join("\\/")
 			if ( dataExists > -1 ){

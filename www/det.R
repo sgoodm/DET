@@ -1,10 +1,17 @@
+write("1.0", "/var/www/html/aiddata/test.txt")
 
 #load packages (manually preinstalled)
 library("raster")
+write("1.1", "/var/www/html/aiddata/test.txt")
+
 library("rgdal")
+
+write("1.2", "/var/www/html/aiddata/test.txt")
 library('leafletR')
 
-#read inputs
+write("2", "/var/www/html/aiddata/test.txt")
+
+# read inputs
 readIn <- commandArgs(trailingOnly = TRUE)
 
 in_pShapefile <- readIn[1]
@@ -15,40 +22,46 @@ in_pCache <- readIn[5]
 in_fCache <- readIn[6]
 in_pBase <- readIn[7]
 in_extractType <- readIn[8]
-
 in_bounds <- readIn[9]
 
-#set bounds if values were given for raster
-if (in_bounds == "TRUE"){
-	in_lowerBound <- as.numeric(readIn[10])
-	in_upperBound <- as.numeric(readIn[11])
-}
+write("3", "/var/www/html/aiddata/test.txt")
 
-#prepare paths
+
+# prepare paths
 dir_base <- paste(in_pBase, "/resources/", sep="")
 dir_shapefile <- paste(dir_base, in_pShapefile, sep="")
 dir_raster <- paste(dir_base, in_pRaster, sep="")
 dir_cache <- paste(dir_base, in_pCache, sep="")
 dir_geojson <- paste(dir_cache, "/geojsons", sep="")
 
-#load shapefile
+# load shapefile
 setwd(dir_shapefile)
 myVector <- readOGR(dir_shapefile, in_fShapefile)
 
-#load raster
+# load raster
 setwd(dir_raster)
 myRaster <- raster(in_fRaster, crs="+proj=longlat +datum=WGS84 +no_defs")
 
-#remove NA values
+# remove NA values
 myRaster[is.na(myRaster)] <- 0 
 
-#remove values outside bounds
-if ( in_bounds == "TRUE" ){
+write("4", "/var/www/html/aiddata/test.txt")
+
+# set bounds if values were given for raster
+# remove values outside bounds
+if (in_bounds == "LOWER" || in_bounds == "BOTH"){
+	in_lowerBound <- as.numeric(readIn[10])
 	myRaster[myRaster < in_lowerBound] <- 0
+}
+if (in_bounds == "UPPER" || in_bounds == "BOTH"){
+	in_upperBound <- as.numeric(readIn[11])
 	myRaster[myRaster > in_upperBound] <- 0
 }
 
-#extract raster data
+write("5", "/var/www/html/aiddata/test.txt")
+
+
+# extract raster data
 if (in_extractType == "sum"){
 	myExtract <- extract(myRaster, myVector, fun=sum, sp=TRUE, small=TRUE)
 } else {
@@ -56,10 +69,10 @@ if (in_extractType == "sum"){
 }
 myOutput <- myExtract@data
 
-#output to csv
+# output to csv
 setwd(dir_cache)
 write.table(myOutput, in_fCache, quote=T, row.names=F, sep=",")
 
-#create geojson for mapping applications
+# create geojson for mapping applications
 setwd(dir_geojson)
 toGeoJSON(data=myExtract, name=unlist(strsplit(in_fCache, "[.]"))[1])
