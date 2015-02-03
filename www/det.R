@@ -1,15 +1,8 @@
-write("1.0", "/var/www/html/aiddata/test.txt")
 
 #load packages (manually preinstalled)
 library("raster")
-write("1.1", "/var/www/html/aiddata/test.txt")
-
 library("rgdal")
-
-write("1.2", "/var/www/html/aiddata/test.txt")
 library('leafletR')
-
-write("2", "/var/www/html/aiddata/test.txt")
 
 # read inputs
 readIn <- commandArgs(trailingOnly = TRUE)
@@ -23,8 +16,6 @@ in_fCache <- readIn[6]
 in_pBase <- readIn[7]
 in_extractType <- readIn[8]
 in_bounds <- readIn[9]
-
-write("3", "/var/www/html/aiddata/test.txt")
 
 
 # prepare paths
@@ -45,7 +36,6 @@ myRaster <- raster(in_fRaster, crs="+proj=longlat +datum=WGS84 +no_defs")
 # remove NA values
 myRaster[is.na(myRaster)] <- 0 
 
-write("4", "/var/www/html/aiddata/test.txt")
 
 # set bounds if values were given for raster
 # remove values outside bounds
@@ -57,8 +47,6 @@ if (in_bounds == "UPPER" || in_bounds == "BOTH"){
 	in_upperBound <- as.numeric(readIn[11])
 	myRaster[myRaster > in_upperBound] <- 0
 }
-
-write("5", "/var/www/html/aiddata/test.txt")
 
 
 # extract raster data
