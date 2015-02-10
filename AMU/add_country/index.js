@@ -8,7 +8,7 @@ $(document).ready(function(){
 		var val = $(this).val()
 		val = val.replace(/ /g, "_")
 		val = val.toLowerCase()
-		val = val.replace(/[^a-zA-z]/g, '')
+		val = val.replace(/[^a-zA-z-]/g, '')
 		val = val.replace("__","_")
 		$(this).val(val)
 		console.log(val)
