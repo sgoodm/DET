@@ -17,7 +17,6 @@ in_pBase <- readIn[7]
 in_extractType <- readIn[8]
 in_bounds <- readIn[9]
 
-
 # prepare paths
 dir_base <- paste(in_pBase, "/resources/", sep="")
 dir_shapefile <- paste(dir_base, in_pShapefile, sep="")
@@ -31,7 +30,7 @@ myVector <- readOGR(dir_shapefile, in_fShapefile)
 
 # load raster
 setwd(dir_raster)
-myRaster <- raster(in_fRaster, crs="+proj=longlat +datum=WGS84 +no_defs")
+myRaster <- raster(in_fRaster) #, crs="+proj=longlat +datum=WGS84 +no_defs")
 
 # remove NA values
 myRaster[is.na(myRaster)] <- 0 
@@ -47,7 +46,6 @@ if (in_bounds == "UPPER" || in_bounds == "BOTH"){
 	in_upperBound <- as.numeric(readIn[11])
 	myRaster[myRaster > in_upperBound] <- 0
 }
-
 
 # extract raster data
 if (in_extractType == "sum"){

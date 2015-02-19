@@ -11,21 +11,12 @@
 set_time_limit(0);
 
 
-
-$os = "lin";
 $COM_DIR = dirname(__DIR__); //local path to DET dir
 
 $DOMAIN = "128.239.22.137";
 $app = basename($COM_DIR);
 $MAIL_DIR = $DOMAIN . substr($COM_DIR, 13, strpos($COM_DIR, $app)-1); //http to DET dir
 
-if (strpos(strtolower(PHP_OS), "win") !== false){
-	$os = "win";
-	$DRIVE = substr($_SERVER["DOCUMENT_ROOT"], 0, 1);
-	$COM_DIR = $DRIVE . ":\/xampp\htdocs\aiddata\\".$app;
-	$DOMAIN = "localhost";
-	$MAIL_DIR = $DOMAIN ."/aiddata/". $app;	
-} 
 
 
 //load queue log and prepare contents
@@ -44,8 +35,12 @@ foreach ($rows as $row) {
 	$r_priority[] = $row[1];
 }
 
+
 //check if there is a request in queue
 if (count($r_queue) > 0){
+
+	$processing_handle = fopen($COM_DIR . "/queue/processing.json", "w");
+	fwrite($processing_handle, "Starting..." . "\n");
 
 	//determine next request to handle
 	$high_priority = array_keys($r_priority, 1);
@@ -63,10 +58,15 @@ if (count($r_queue) > 0){
 	$q_raw = file_get_contents($q_file);
 	$q_data = json_decode($q_raw,true);
 
+	fwrite($processing_handle, $q_raw . "\n");
+	
 	//for each raster requested: build cache ID, check if cache exists and run R script if cache does not exist (and log R run times)
 	$cacheList = [];
 	$path_shapefile = $q_data["parent"];
 	$file_shapefile = $q_data["file"];
+
+	fwrite($processing_handle, "Begin raster processing." . "\n");
+
 	for ($i=0; $i<count($q_data["raster"]); $i++) {
 		$path_raster = $q_data["rparent"][$i];
 		$file_raster = $q_data["rfile"][$i];
@@ -102,12 +102,12 @@ if (count($r_queue) > 0){
 			$r_vars = $path_shapefile ." ". $file_shapefile ." ".  $path_raster ." ".  $file_raster ." ". $path_cache . " " . $file_cache ." ". $COM_DIR ." ". $extract_type ." ". $bounds ." ". $lower_bound ." ". $upper_bound;
 			$start_time = time();
 
-			if ($os == "win"){
-				exec($COM_DIR."\R\bin\Rscript ".$COM_DIR."\www\det.R $r_vars"); 
-			} else {
-				exec("/usr/bin/Rscript ".$COM_DIR."/www/det.R $r_vars"); 
-			} 
-	
+			fwrite($processing_handle, "Running RScript " . $i . "\n");
+
+			exec("/usr/bin/Rscript ".$COM_DIR."/www/det.R $r_vars"); 
+			
+			fwrite($processing_handle, "RScript ".$i." done." . "\n");
+
 			$end_time = time();
 			$run_time = $end_time - $start_time;
 			$timeHandle = fopen($COM_DIR ."/resources/". $path_cache ."/run_times.csv", "a"); 
@@ -115,6 +115,7 @@ if (count($r_queue) > 0){
 			fputcsv($timeHandle, $timeData);
 		}
 	}
+	fwrite($processing_handle, "Finished processing rasters." . "\n");
 
 	//--------------------------------------------------
 
@@ -147,6 +148,8 @@ if (count($r_queue) > 0){
 		fclose( $value );
 	}
 	fclose($outHandle);
+
+	fwrite($processing_handle, "Finished joining rasters." . "\n");
 
 	//--------------------------------------------------
 
@@ -320,6 +323,8 @@ if (count($r_queue) > 0){
 	$mail_headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
 	mail($mail_to, $mail_subject, $mail_message, $mail_headers);
 
+	fwrite($processing_handle, "Finished.");
+	fclose($processing_handle);
 }
 
 ?>
