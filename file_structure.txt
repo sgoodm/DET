@@ -1,0 +1,102 @@
++ DET
+	+ AMU
+
+	+ www
+
+	+ libs
+
+	+ queue
+		+ pending
+			- 103.json
+			- 104.json
+			- ...
+		+ avaiable
+			+ 101
+				- 101.csv
+				- 101.html
+				- 101.json
+				- 101.zip
+				- documentation.html
+				- documentation.pdf
+			+ 102
+				- 102.csv
+				- 102.html
+				- 102.json
+				- 102.zip
+				- documentation.html
+				- documentation.pdf
+			+ ...
+		- pending.csv
+		- available.csv
+		- history.csv
+		- log.csv
+
+	+ resources
+		+ "continent 1"
+			+ "country 1"
+				+ cache
+					+ geojsons
+						- extract1.geojson
+						- extract2.geojson
+						- ...
+					- extract1.csv
+					- extract2.csv
+					- ...
+					- run_times.csv
+				+ data
+					+rasters
+						+ "type_1"
+							+ "sub_type_1"
+								+ "year_1"
+									- raster file
+									- meta_info.json
+								- meta_info.txt
+								+ ...
+							+ ...
+						+ ...
+
+				+ shapefiles
+					+ "1_adm1"
+						+ "year_1"
+							- shapefile
+							- meta_info.json
+						- Leaflet.geojson
+					+ ...
+
+	+ uploads
+		+ globals
+			+ pending
+				+ type__sub_type__year
+					- raster
+					- meta_info.json
+
+			+ processed
+				+ type__sub_type__year
+					- country_info.csv
+					- raster
+					- meta_info.json
+			+ raw
+			+ rejected
+				+ type__sub_type__year
+					- reason.txt
+					- raster
+					- meta_info.json
+			- country_list.csv
+			- global_list.csv
+
+		+ locals
+			+ pending
+				+ continent__country__type__sub_type__year
+					- raster
+					- meta_info.json
+
+			+ processed
+				+ continent__country__type__sub_type__year
+					- raster
+					- meta_info.json
+			+ rejected
+				+ continent__country__type__sub_type__year
+					- reason.txt
+					- raster
+					- meta_info.json
+			- local_list.csv
